@@ -30,7 +30,9 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_can_send_a_request_to_pushover()
     {
-        $this->guzzleClient->shouldReceive('post')
+        $this->guzzleClient
+            ->shouldReceive('post')
+            ->once()
             ->with('https://api.pushover.net/1/messages.json', [
                 'form_params' => [
                     'token' => 'application-token',
@@ -43,7 +45,9 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_can_send_a_request_with_an_overridden_token()
     {
-        $this->guzzleClient->shouldReceive('post')
+        $this->guzzleClient
+            ->shouldReceive('post')
+            ->once()
             ->with('https://api.pushover.net/1/messages.json', [
                 'form_params' => [
                     'token' => 'dynamic-application-token',
@@ -56,7 +60,9 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_can_accept_parameters_for_a_send_request()
     {
-        $this->guzzleClient->shouldReceive('post')
+        $this->guzzleClient
+            ->shouldReceive('post')
+            ->once()
             ->with('https://api.pushover.net/1/messages.json', [
                 'form_params' => [
                     'token' => 'application-token',

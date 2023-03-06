@@ -81,12 +81,12 @@ class PushoverChannelTest extends TestCase
     /** @test */
     public function it_fires_a_notification_failed_event_when_the_communication_with_pushover_failed()
     {
-        $this->notification->shouldReceive('toPushover')->andReturn($this->message);
-        $this->pushover->shouldReceive('send')->andThrow(
+        $this->notification->shouldReceive('toPushover')->once()->andReturn($this->message);
+        $this->pushover->shouldReceive('send')->once()->andThrow(
             ServiceCommunicationError::communicationFailed(new Exception())
         );
 
-        $this->events->shouldReceive('fire')->with(Mockery::type(NotificationFailed::class));
+        $this->events->shouldReceive('fire')->once()->with(Mockery::type(NotificationFailed::class));
 
         $this->channel->send(new Notifiable, $this->notification);
     }
